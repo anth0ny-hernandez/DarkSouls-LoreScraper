@@ -2,7 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 
 #url = "http://darksouls.wikidot.com/moonlight-set"
-url = "http://darksouls.wikidot.com/crimson-set"
+# url = "http://darksouls.wikidot.com/crimson-set"
+url = "http://darksouls.wikidot.com/adventurer-s-set"
 headers = {
     "User-Agent": "DS1 LoreScraper (small, amateur personal project)"
 }

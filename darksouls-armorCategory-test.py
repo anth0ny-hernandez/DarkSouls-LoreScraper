@@ -22,7 +22,7 @@ for link in links:
     #print(full_path) # forms complete URL as href is only relative
     
 
-# small test to extract some armor descriptions
+# small test to extract 2 armor descriptions
 for i in range(0, 2):
     url2 = host_name + path_ref[i]
     page2 = requests.get(url2, headers=headers)

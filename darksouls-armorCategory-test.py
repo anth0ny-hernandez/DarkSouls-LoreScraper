@@ -23,6 +23,7 @@ for link in links:
     
 
 # small test to extract 2 armor descriptions
+# give more unique variable names
 for i in range(0, 2):
     url2 = host_name + path_ref[i]
     page2 = requests.get(url2, headers=headers)

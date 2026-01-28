@@ -1,68 +1,68 @@
 import asyncio
-import aiohttp as aiohttp
-import requests
+import aiohttp
+import time
+from random import randint
 from bs4 import BeautifulSoup
 
 BASE_URL = "http://darksouls.wikidot.com"
+HEADERS = {
+    "User-Agent": "DS1 LoreScraper (small, amateur personal project)"
+}
 
-# ******** asynchronous scrape START ********
-
-async def fetch(url):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            return await resp.text()
+async def get_page(session, url):
+    async with session.get(url) as resp:
+        return await resp.text()
 
 
-async def crawl():
-    page = []
-    webpage = await fetch("http://darksouls.wikidot.com/armor")
-    soup = BeautifulSoup(webpage, "html.parser")
+async def get_all_descriptions(session, urls):
+    descriptions = []
+    for url in urls:
+        time.sleep(randint(1, 3))
+        page = await get_single_description(session, url)
+        descriptions.append(page)
+    results = await asyncio.gather(*descriptions)
+    return results
+
+
+async def get_single_description(session, url):
+    page = await get_page(session, url)
+    soup = BeautifulSoup(page, "html.parser")
+    results = soup.find(id="page-content")
+    page_table = results.find_all("table")
+    armor_dsc = page_table[2]    
+    row = armor_dsc.find_all("td")
+    print()
     
-    # retrieves the bulleted armor sets
+    for cell in row:               
+        h3_element = cell.find("h3")
+        p_element = cell.find_all("p")
+        print(h3_element.text)
+        for ds1 in p_element:
+            print(ds1.text)
+        print()
+    print("-------------------------------------------------------------------------")
+
+
+async def get_all_URLS(session):
+    urls = []
+    page = await get_page(session, "http://darksouls.wikidot.com/armor")
+    soup = BeautifulSoup(page, "html.parser")
+    
+    # naviagtes HMTL DOM to find links pertaining to an armor set
     results = soup.find(id="page-content")
     tables = results.find_all("table")
     armor_list = tables[0].find("ul")
     links = armor_list.find_all("a")
     for link in links:
-        page.append(BASE_URL + link["href"])
-    
-    return page
-
-
-# *** call scrape(links) ***
-# asynchronous function to process all 58 armors more quickly
-async def scrape(armorAsycnArray):
-    # small test to extract 2 armor descriptions
-    # give more unique variable names
-    armorAsycnArray = armorAsycnArray[0:10]
-    url2 = await fetch(armorAsycnArray)
-    soup2 = BeautifulSoup(url2, "html.parser")
-    results2 = soup2.find(id="page-content")
-    page_table = results2.find_all("table")
-    # print(page_table)
-    armor_dsc = page_table[2]
-
-    row = armor_dsc.find_all("td")
-    print()
-    for cell in row:               
-        h3_element = cell.find("h3") # change to hr in terminal
-        p_element = cell.find_all("p")
-        print(h3_element.text) # add .text
-        for ds1 in p_element:
-            print(ds1.text) # add .text
-            #print()
-            print()
-            print("-------------------------------------------------------------------------")
+        urls.append(BASE_URL + link["href"]) # note: use url parser
+    return urls
 
 
 async def main():
-    links = await crawl()
+    async with aiohttp.ClientSession(headers=HEADERS) as session: # maintains single, reusable connection
+        armor_urls = await get_all_URLS(session) # retrieves all 58 urls for each respective set
+        armor_descriptions = await get_all_descriptions(session, armor_urls) # retrieves individual, unique set descriptions
+        print(armor_descriptions)
     
-    tasks = []
-    for link in links:
-        tasks.append(scrape(link))
-    armors = await asyncio.gather(*tasks)
-    
-    
+
 asyncio.run(main())
-# ******** asynchronous scrape END ********

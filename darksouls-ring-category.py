@@ -8,6 +8,7 @@ domain_name = "http://darksouls.wikidot.com"
 headers = {
     "User-Agent": "DS1 LoreScraper (small, amateur personal project)"
 }
+SEM = asyncio.Semaphore(5)
 
 async def get_page(session, url):
     async with session.get(url) as resp:
@@ -15,27 +16,32 @@ async def get_page(session, url):
     
 
 async def get_single_description(session, url):
-    page = await get_page(session, url)
-    soup = BeautifulSoup(page, "html.parser")
-    results = soup.find(id="page-content")
-    ring_descr = results.find_all("p")
-    # due to the 'p' element separating the complete
-    # descriptions, we must iterate through the elements
-    # print(ring_descr[0])
-    # print(ring_descr[1])
-    ring_descr_set = ring_descr[0].text + "\n" + ring_descr[1].text
-    return ring_descr_set
+    async with SEM:
+        page = await get_page(session, url)
+        soup = BeautifulSoup(page, "html.parser")
+        results = soup.find(id="page-content")
+        # ring_descr = results.find_all("p")
+        # due to the 'p' element separating the complete
+        # descriptions, we must iterate through the elements
+        # ring_descr_set = ring_descr[0].text + "\n" + ring_descr[1].text
+        first_h2 = results.find("h2")
+        p_tags = ""
+        for sibling in first_h2.find_next_siblings():
+            if sibling.name == "h2":
+                break
+            if sibling.name == "p":
+                text = sibling.get_text()
+                if text:
+                    p_tags += text
+        return p_tags
 
 
 async def get_all_descriptions(session, urls):
     descriptions = []
     for ring_data in urls:
         link = ring_data[0]
-        # print(link)
-        page = await get_single_description(session, link)
-        descriptions.append(page)
-    results = await asyncio.gather(*descriptions)
-    return results
+        descriptions.append(get_single_description(session, link))
+    return await asyncio.gather(*descriptions)
 
 
 async def get_all_URLS(session):
@@ -56,7 +62,6 @@ async def get_all_URLS(session):
                 ring[3].text
             ]
         )
-    
     return ring_data
 
 
@@ -67,7 +72,12 @@ async def main():
         # e.g., here: top-->bottom; actual functions: bottom-->top
         ring_urls = await get_all_URLS(session)
         ring_description = await get_all_descriptions(session, ring_urls)
-        print(ring_description)
+        for i in range(0, len(ring_urls)):
+            ring_urls[i].append(ring_description[i])
+            # print(ring_urls[i])
+            for j in ring_urls[i]:
+                print(j)
+            print("--------------------------")
 
 
 asyncio.run(main())

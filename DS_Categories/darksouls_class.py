@@ -60,7 +60,20 @@ class DarkSouls:
             case "class":
                 table_html = soup.find_all(class_=element)
                 for table in table_html:
-                    rows = table.find_all("tr")[1:]
+                    rows = table.find_all("tr")[1:] 
+                    # truncates table headers (*TO WORK ON)
+                    # rows = table.find_all("tr")
+                    headers = table.find_all("tr")[0].find_all("th")
+                    abs_cols = ('Name', 'Use', 'Description', 'Location', 'Location/Trainer', 'Availability')
+                    skip_cols_pos = []
+                    # for header in rows[0]:
+                        # if header == 'Uses' or 'Slots':
+                    for i in range(0, len(headers)):
+                        if headers[i].text not in abs_cols:
+                            skip_cols_pos.append(i)
+                    skip_cols = tuple(skip_cols_pos)
+                            
+                    # END OF *TO WORK ON
                     for row in rows:
                         consume = row.find_all("td")
                         # Due to wiki tables sharing the class 'wiki-content-table',
@@ -71,9 +84,11 @@ class DarkSouls:
                             table_data.append(
                                 [
                                     urljoin(self.host_url, row.find("a")["href"]),
+                                    consume[0].find("img")["src"],
                                     # unpacks iterated list; noticed that some page's
                                     # table rows have 4 or 5 column values
-                                    *[consume[i].text for i in range(1, len(consume))]
+                                    # *[consume[i].text for i in range(1, len(consume))]
+                                    *[consume[i].text for i in range(1, len(consume)) if i not in skip_cols]
                                 ]
                             )
                         else:
@@ -89,11 +104,11 @@ class DarkSouls:
             # now we match every entry in the url list to their respective item description list
             for i in range(len(consumables_url)):
                 consumables_url[i].append(consumables_description[i])
-            
-            for i in consumables_url:
-                for j in i:
-                    print(j)
-                print()
+            return consumables_url
+            # for i in consumables_url:
+            #     # for j in i:
+            #     #     print(j)
+            #     print(i)
 
     def run(self):
-        asyncio.run(self.main())
+        return asyncio.run(self.main())

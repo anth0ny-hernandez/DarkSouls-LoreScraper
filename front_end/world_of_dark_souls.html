@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="darksouls.css">
+        <title>
+            World of Dark Souls
+        </title>
+    </head>
+    <!-- Important: Will need to install django-cors-headers package to solve
+     the issue of Cross-Origin Request Block ===>
+     "https://pypi.org/project/django-cors-headers/" -->
+    <body onload="loadJSON()">
+        <header>
+            <h1 style="text-align: center;">"Be safe my friend, and don't you dare go hollow."</h1>
+        </header>
+        <ul>
+            <li><a href="ds_armor.html">Armor</a></li>
+            <li><a href="ds_pyromancy.html">Pyromancy</a></li>
+            <li><a href="ds_convenants.html">Covenants</a></li>
+            <li><a href="ds_rings.html">Rings</a></li>
+        </ul>
+        <main>
+            <table id="lore-table">
+                <tr>
+                    <th>Icon</th>
+                    <th>Name</th>
+                    <th>Usage</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                </tr>
+            </table>
+            <script>
+                async function api_request() {
+                    try {
+                        const response = await fetch("http://127.0.0.1:8000/soulsborne/");
+                        if(!response.ok) {
+                            throw new Error(`Response status: ${response.status}`);
+                        }
+                        const result = await response.json();
+                        console.log(result);
+                        // populate(result);
+                        return await result;
+                    }
+                    catch (error) {
+                        console.error(error.message);
+                    }
+                }
+                // apiArray = await api_request();
+                async function loadJSON() {
+                    const apiArray = await api_request();
+                    const loreTable = document.getElementById("lore-table");
+                    for(let i = 0; i < apiArray.length; i++) {
+                        const row = `
+                        <tr>
+                            <td><img src="${apiArray[i]["item_icon"]}"></td>
+                            <td>${apiArray[i]["item_name"]}</td>
+                            <td>${apiArray[i]["item_use"]}</td>
+                            <td>${apiArray[i]["item_availability"]}</td>
+                            <td>${apiArray[i]["item_description"]}</td>
+                        </tr>`;
+                        loreTable.innerHTML += row;
+                    }
+                }
+                // document.writeln(apiArray);
+                // const apiArray = api_request();
+                // for(let i = 0; i < apiArray.length; i++) {
+                //     document.write("<tr>");
+                //         // document.writeln("<td>" + apiArray[i]["item_icon"] + "</td>");
+                //         document.writeln("<td>" + apiArray[i]["item_name"] + "</td>");
+                //         document.writeln("<td>" + apiArray[i]["item_use"] + "</td>");
+                //         document.writeln("<td>" + apiArray[i]["item_availability"] + "</td>");
+                //         document.writeln("<td>" + apiArray[i]["item_description"] + "</td>");
+                //         // document.write(apiArray[i]["url"])
+                //     document.write("</tr>")
+                // }
+            </script>
+        </main>
+    </body>
+</html>

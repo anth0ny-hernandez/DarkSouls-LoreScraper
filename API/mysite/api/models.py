@@ -14,6 +14,8 @@ class Soulsborne(models.Model):
     item_availability = models.CharField(max_length=250)
     item_description = models.TextField()
     category_type = models.CharField(max_length=50, null=True)
+    # comments = models.TextField()
+    # tags = models.CharField(max_length=25, null=True)
     
     def __str__(self):
         return self.title

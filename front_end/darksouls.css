@@ -21,7 +21,8 @@ ul li a:hover {
     background-color: gray;
 }
 table, tr, td, th {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: 5px;
     margin: 5px;
+    white-space: pre-wrap;
 }

@@ -5,11 +5,13 @@
         <title>
             World of Dark Souls
         </title>
+        <meta charset="utf-8">
     </head>
     <!-- Important: Will need to install django-cors-headers package to solve
      the issue of Cross-Origin Request Block ===>
      "https://pypi.org/project/django-cors-headers/" -->
-    <body onload="loadJSON()">
+    <body onload="apiCall()">
+        <script src="api_call.js"></script>
         <header>
             <h1 style="text-align: center;">"Be safe my friend, and don't you dare go hollow."</h1>
         </header>
@@ -20,6 +22,42 @@
             <li><a href="ds_rings.html">Rings</a></li>
         </ul>
         <main>
+            <form action="" method="get" id="specs_form" onsubmit="getUpdate(event)">
+                <label>Sort items by: </label>
+                <select name="sort" id="sort" onchange="sortby()">
+                    <option value="category">Category</option>
+                    <option value="location">Location</option>
+                    <option value="tags">Tags</option>
+                    <option value="alpha">Alphabetical</option>
+                    <option value="rev_alpha">Reverse Alphabetical</option>
+                </select>
+                <select name="by" id="by">
+                    <!-- naming convention is as such as you can only sort 'by' by
+                     selecting what/how you want to sort to begin with -->
+                </select>
+                <script>
+                    function sortby() {
+                        const selectVal = document.getElementById("sort").value;
+                        switch(selectVal) {
+                            case "category":
+                                const djangocall = new DjangoCall();
+                                djangocall.extractField();
+                            case "location":
+                                //
+                            case "tags":
+                                //
+                        }
+                    }
+                </script>
+                <button type="submit" form="specs_form">Go</button>
+            </form>
+            <script>
+                function getUpdate(event) {
+                    event.preventDefault();
+                    const idk = new DjangoCall();
+                    idk.updatePage();
+                }
+            </script>
             <table id="lore-table">
                 <tr>
                     <th>Icon</th>
@@ -28,53 +66,17 @@
                     <th>Location</th>
                     <th>Description</th>
                     <th>Category</th>
+                    <th>Comments</th>
+                    <th>Tags</th>
                 </tr>
             </table>
-            <script>
-                async function api_request() {
-                    try {
-                        const response = await fetch("http://127.0.0.1:8000/soulsborne/");
-                        if(!response.ok) {
-                            throw new Error(`Response status: ${response.status}`);
-                        }
-                        const result = await response.json();
-                        console.log(result);
-                        // populate(result);
-                        return await result;
-                    }
-                    catch (error) {
-                        console.error(error.message);
-                    }
+            <!-- insert javascript code here -->
+             <script>
+                function apiCall() {
+                    const defaultVal = new DjangoCall();
+                    defaultVal.loadJSON("pyromancy");
                 }
-                // apiArray = await api_request();
-                async function loadJSON() {
-                    const apiArray = await api_request();
-                    const loreTable = document.getElementById("lore-table");
-                    for(let i = 0; i < apiArray.length; i++) {
-                        const row = `
-                        <tr>
-                            <td><img src="${apiArray[i]["item_icon"]}"></td>
-                            <td>${apiArray[i]["item_name"]}</td>
-                            <td>${apiArray[i]["item_use"]}</td>
-                            <td>${apiArray[i]["item_availability"]}</td>
-                            <td>${apiArray[i]["item_description"]}</td>
-                        </tr>`;
-                        loreTable.innerHTML += row;
-                    }
-                }
-                // document.writeln(apiArray);
-                // const apiArray = api_request();
-                // for(let i = 0; i < apiArray.length; i++) {
-                //     document.write("<tr>");
-                //         // document.writeln("<td>" + apiArray[i]["item_icon"] + "</td>");
-                //         document.writeln("<td>" + apiArray[i]["item_name"] + "</td>");
-                //         document.writeln("<td>" + apiArray[i]["item_use"] + "</td>");
-                //         document.writeln("<td>" + apiArray[i]["item_availability"] + "</td>");
-                //         document.writeln("<td>" + apiArray[i]["item_description"] + "</td>");
-                //         // document.write(apiArray[i]["url"])
-                //     document.write("</tr>")
-                // }
-            </script>
+             </script>
         </main>
     </body>
 </html>

@@ -2,8 +2,8 @@ from darksouls_class import DarkSouls
 import requests
 import json
 
-# ds1 = DarkSouls("http://darksouls.wikidot.com/consumables", "class", "wiki-content-table")
-ds2 = DarkSouls("http://darksouls.wikidot.com/consumables", "class", "wiki-content-table")
+# ds1 = DarkSouls("http://darksouls.wikidot.com/sorceries", "class", "wiki-content-table")
+ds2 = DarkSouls("http://darksouls.wikidot.com/miracles", "class", "wiki-content-table")
 # ds3 = DarkSouls("http://darksouls.wikidot.com/covenants", "class", "wiki-content-table")
 
 # print(ds1.url)
@@ -18,7 +18,8 @@ for item in results:
             "item_name": item[2],
             "item_use": item[3],
             "item_availability": item[4],
-            "item_description": item[5]
+            "item_description": item[5],
+            "category_type": "miracle"
         }
     )
 
@@ -30,9 +31,17 @@ with open('./scraped_data.json', 'w') as f:
 with open('scraped_data.json') as f:
     items = json.load(f)
     
+i = 1
 for item in items:
     response = requests.post(
         'http://127.0.0.1:8000/soulsborne/',
         json=item
     )
     print(f"{item['item_name']}: {response.status_code}")
+    # section to request data at the url and locally download them
+    # file names are at your discretion
+    img_url = requests.get(item["item_icon"]).content
+    
+    with open(f'Images/DS/miracle/miracle_{i}.png', 'wb') as g:
+        g.write(img_url)
+    i+=1

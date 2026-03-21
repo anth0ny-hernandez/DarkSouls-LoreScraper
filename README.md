@@ -10,3 +10,6 @@ To run the Django REST Framework API, note the following packages:
  'bs4'
  'aiohttp'
  'requests'
+
+ Optionally, but preferrably, XAMPP/Apache may be downloaded to host and give the project a more professional feel and experience.
+ It should be noted that doing so -- or not doing so -- would entail modifying the CORS settings in Django's settings.py file.

@@ -17,17 +17,14 @@ class DjangoCall {
             console.error(error.message);
         }
     }
-    // apiArray = await api_request();
-    async loadJSON(cat_type) {
+    async loadJSON(fieldValue, cat_type) {
         const apiArray = await this.api_request();
         // insert way to categorize JSON by category type...pyromancy for default for now
-        const loreTable = document.getElementById("lore-table");
+        const loreTable = document.getElementById('lore-table');
         loreTable.innerHTML = "";
         // **** A/N: Sort out issue of incrementing / extracting API based on
         // category ****
         let incr = 1;
-        // let cat_type; for now pyro will be the placeholder
-        // let cat_type = "pyromancy"
         for(let i = 0; i < apiArray.length; i++) {
             const temp_type = apiArray[i]["category_type"]; // just for directory navigation
             const row = `
@@ -47,7 +44,16 @@ class DjangoCall {
                     type="submit" value="Add" onclick="">
                 </td>
             </tr>`;
-            if(apiArray[i]["category_type"] == cat_type) { 
+            // if(apiArray[i]["category_type"] == fieldValue) { 
+            //     loreTable.innerHTML += row;
+            //     incr++;
+            // }
+            // else { continue; }
+
+            // sorts by parameter rather than specific
+            // actually, why does this even work? 
+            // switching the order of the conditions breaks everything
+            if(fieldValue == apiArray[i][cat_type]) {
                 loreTable.innerHTML += row;
                 incr++;
             }
@@ -59,29 +65,44 @@ class DjangoCall {
     async updatePage() {
         const sortSelect = document.getElementById("sort").value;
         const bySelect = document.getElementById("by").value;
-        const lowercasedString = bySelect.toLowerCase();
+        console.log(bySelect);
         
         switch(sortSelect) {
             case "category":
-                await this.loadJSON(lowercasedString);
+                const lowercasedString = bySelect.toLowerCase();
+                await this.loadJSON(lowercasedString, "category_type");
+                break;
+            case "location":
+                await this.loadJSON(bySelect, "item_availability");
+                break;
+            case "tags":
+                await this.loadJSON(bySelect);
+                break;
+            case "alpha":
+                await this.loadJSON(bySelect);
+                break;
+            case "rev_alpha":
+                await this.loadJSON(bySelect);
+                break;
         }
     }
 
 
-    async extractField() {
-        const filterArray = await this.api_request();
-        const category_array = [];
-        for(let i = 0; i < filterArray.length; i++) {
-            category_array.push(filterArray[i]["category_type"]);
+    async extractField(selectedOption) {
+        console.log(selectedOption);
+        const reqData = await this.api_request();
+        const tempArray = [];
+        for(let i = 0; i < reqData.length; i++) {
+            tempArray.push(reqData[i][selectedOption]);
         }
-        const uniqueCat = new Set(category_array);
-        const amogus = Array.from(uniqueCat);
+        const uniqueFieldSet = new Set(tempArray);
+        const setArray = Array.from(uniqueFieldSet);
         const sortByVal = document.getElementById("by");
-
-        for(let i = 0; i < amogus.length; i++) {
-            let capitalize = amogus[i].charAt(0).toUpperCase() + amogus[i].slice(1);
+        sortByVal.innerHTML = "";
+        for(let i = 0; i < setArray.length; i++) {
+            let capitalize = setArray[i].charAt(0).toUpperCase() + setArray[i].slice(1);
             sortByVal.innerHTML += `
-                <option value="${amogus[i]}">${capitalize}</option>
+                <option value="${setArray[i]}">${capitalize}</option>
             `;
         }
     }

@@ -1,0 +1,209 @@
+[
+  {
+    "url": "http://darksouls.wikidot.com/bountiful-sunlight",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/bountiful-sunlight.png",
+    "item_name": "Bountiful Sunlight",
+    "item_use": "Gradual HP restoration for self and allies in vicinity\n\nRequires you to be in Princess's Guard to use",
+    "item_availability": "The Duke's Archives Pisaca drop",
+    "item_description": "Special miracle granted to the maidens\nof Gwynevere, Princess of the Sun.\nGradual HP restoration for self and vicinity.The miracles of Gwynevere, the princess\ncherished by all, grant their blessing to\na great many warriors.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/darkmoon-blade",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/darkmoon-blade.png",
+    "item_name": "Darkmoon Blade",
+    "item_use": "Boost right hand weapon with rays of Darkmoon\n\nRequires you to be in Blade of the Darkmoon to use",
+    "item_availability": "Reach +1 in the\nBlade of the Darkmoon Covenant",
+    "item_description": "Miracle granted to those bound by covenant\nto Gwyndolin, Lord Gwyn's lastborn.\nBoost right weapon with rays of Darkmoon.The power of the rays of the Darkmoon are\nmanifested in vengeance, and the deeper the\nanimus, the more devastating the attack.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/emit-force",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/emit-force.png",
+    "item_name": "Emit Force",
+    "item_use": "Release a powerful burst of force which can knock down or stun enemies",
+    "item_availability": "Siegmeyer of Catarina at Firelink Shrine",
+    "item_description": "Outland miracle, foreign to the Way of White.\nEmit shockwave.Considered an alternate branching of Force.\nEmits an expanding shockwave orb.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/force",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/force.png",
+    "item_name": "Force",
+    "item_use": "Create shockwave, but no damage done.",
+    "item_availability": "Petrus of Thorolund\nRhea of Thorolund",
+    "item_description": "Common miracle among cleric knights.\nCreate shockwave.This quickly-acting miracle inflicts no\ndamage, but propels foes back and defends\nagainst arrows. Cleric knights use this\nmiracle when charging into enemy mobs.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/gravelord-greatsword-dance",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/gravelord-greatsword-dance.png",
+    "item_name": "Gravelord Greatsword Dance",
+    "item_use": "Giant Gravelord Swords jut out in vicinity",
+    "item_availability": "Reach +1 in the\nGravelord Servant Covenant",
+    "item_description": "Miracle known only by the servants\nof the first dead, Gravelord Nito.\nGiant Gravelord swords jut out in vicinity.Many have died, and many eyes were claimed to\nrealize the Greatsword Dance, a Gravelord\nritual known only by his closest servants.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/gravelord-sword-dance",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/gravelord-sword-dance.png",
+    "item_name": "Gravelord Sword Dance",
+    "item_use": "Gravelord Swords jut out in vicinity",
+    "item_availability": "Join the\nGravelord Servant Covenant",
+    "item_description": "Miracle known only by the servants of\nthe first dead, Gravelord Nito.\nGiant Gravelord swords jut out in vicinity.Nito sleeps deep within the Giant Catacombs,\nquietly overseeing all death, and waiting for\nhis servants to usher in the Eye of Death.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/great-heal-excerpt",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/great-heal-excerpt.png",
+    "item_name": "Great Heal Excerpt",
+    "item_use": "Heals a large amount of HP",
+    "item_availability": "Petrus of Thorolund\nRhea of Thorolund\nPatches",
+    "item_description": "Great miracle cast by advanced clerics.\nRestores high HP.Great Heal Excerpt borrows from only\nseveral verses of Great Heal. As a result,\nit can only be cast a stark few times.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/great-heal",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/great-heal.png",
+    "item_name": "Great Heal",
+    "item_use": "Restores high HP",
+    "item_availability": "Rhea of Thorolund",
+    "item_description": "Great miracle cast by advanced clerics.\nRestores high HP.Great Heal is a long tale, only learned by a\nselect few. No caster will be disappointed\nby the bountiful life that it yields.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/great-lightning-spear",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/great-lightning-spear.png",
+    "item_name": "Great Lightning Spear",
+    "item_use": "Strictly more powerful version of the Lightning Spear",
+    "item_availability": "Reach +1 in the\nWarrior of Sunlight Covenant",
+    "item_description": "Miracle passed down by\nthose bound to the Warrior of Sunlight covenant.\nHurl giant lightning spear.The weapon of the God of War, who inherited\nthe sunlight of Lord Gwyn, but had\nrespect only for arms, and nothing else.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/great-magic-barrier",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/great-magic-barrier.png",
+    "item_name": "Great Magic Barrier",
+    "item_use": "Cover body in powerful def. magic coating.",
+    "item_availability": "Ash Lake treasure",
+    "item_description": "Miracle of Bishop Havel the Rock.\nCover body in powerful def. magic coating.Havel the Rock, an old battlefield compatriot\nof Lord Gwyn, was the sworn enemy of Seath\nthe Scaleless. He despised magic, and made\ncertain to devise means of counteraction.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/heal",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/heal.png",
+    "item_name": "Heal",
+    "item_use": "Heals a small amount of HP",
+    "item_availability": "Cleric starting spell\nPetrus of Thorolund\nRhea of Thorolund\nPatches",
+    "item_description": "Elementary miracle cast by clerics.\nRestores HP.To cast a miracle, the caster learns a tale\nof the Gods, and says a prayer to be blessed\nby its revelations. Heal is the shortest\nof such miraculous tales.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/homeward",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/homeward.png",
+    "item_name": "Homeward",
+    "item_use": "Return to last Bonfire used",
+    "item_availability": "Petrus of Thorolund\nRhea of Thorolund",
+    "item_description": "Great miracle cast by advance clerics.\nReturn to last bonfire rested at.Would normally link to one's homeland,\nonly the curse of the Undead has distorted\nits power, redirecting casters to a bonfire.\nOr perhaps for Undead, this serves as home?",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/karmic-justice",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/karmic-justice.png",
+    "item_name": "Karmic Justice",
+    "item_use": "Temporary autocounter vs. heavy damage",
+    "item_availability": "Oswald of Carim",
+    "item_description": "Miracle of the black-haired witch Velka.\nTemporary autocounter vs. heavy damage.For each sin there is a punishment, and\nit is the task of Goddess Velka to define\nthe sin, and mete out the punishment.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/lightning-spear-miracle",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/lightning-spear.png",
+    "item_name": "Lightning Spear",
+    "item_use": "Throw a javelin of lightning",
+    "item_availability": "Join the\nWarrior of Sunlight Covenant",
+    "item_description": "Miracle passed down to those bound by\nthe Warrior of Sunlight covenant.\nHurl Lightning spearLightning spears inflict rare lightning\ndamage, and are very effective against\nmagic, fire, and most of all, dragons.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/magic-barrier",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/magic-barrier.png",
+    "item_name": "Magic Barrier",
+    "item_use": "Cover body in defensive magic coating",
+    "item_availability": "Rhea of Thorolund",
+    "item_description": "Miracle of Bishop Havel the Rock.\nCover body in defensive magic coating.This coating greatly boosts magic defense,\nassisting warriors who must face the magic\nwhich Bishop Havel countered so proficiently.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/replenishment",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/replenishment.png",
+    "item_name": "Replenishment",
+    "item_use": "Gradual HP restoration",
+    "item_availability": "Rhea of Thorolund at the Tomb of the Giants",
+    "item_description": "Common miracle amongst cleric knights.\nGradual HP restoration.Beware of the cleric knight blessed by\nReplenishment, for he shall not fall easily.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/seek-guidance",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/seek-guidance.png",
+    "item_name": "Seek Guidance",
+    "item_use": "Display more guidance from other worlds",
+    "item_availability": "Petrus of Thorolund\nRhea of Thorolund",
+    "item_description": "Miracle of Clerics on an Undead mission.\nDisplay more guidance from other worlds.Guidance facilitates communication between\nUndead, but their value varies greatly.\nA balance of faith and wisdom is required.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/soothing-sunlight",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/soothing-sunlight.png",
+    "item_name": "Soothing Sunlight",
+    "item_use": "Restores high HP for self and allies in vicinity\n\nRequires you to be in Princess's Guard to use",
+    "item_availability": "The Duke's Archives Pisaca drop",
+    "item_description": "Special miracle granted to the maidens\nof Gwynevere, Princess of the Sun.\nRestores high HP for self and vicinity.The miracles of Gwynevere, the princess\ncherished by all, grant their blessing to\na great many warriors.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/sunlight-blade",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/sunlight-blade.png",
+    "item_name": "Sunlight Blade",
+    "item_use": "Buff right hand weapon with strong Lightning",
+    "item_availability": "Anor Londo, in the Darkmoon Tomb after defeating Dark Sun Gwyndolin",
+    "item_description": "Miracle wielded by Lord Gwyn's firstborn.Boost right weapon with rays of Sun.The power of sunlight, manifested as\nlightning, is very effective against dragons.When the eldest son was stripped of his\ndeific status, he left this on his father's\ncoffin, perhaps as a final farewell.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/sunlight-spear",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/sunlight-spear.png",
+    "item_name": "Sunlight Spear",
+    "item_use": "Upgraded version of the Lightning Spear\n\nRequires you to be in Warrior of Sunlight to use",
+    "item_availability": "Join Warrior of Sunlight Covenant\n& offer Soul of Gwyn, Lord of Cinder at the Altar of Sunlight",
+    "item_description": "Miracle born from the fading soul of Gwyn.Hurl sunlight spear.In the war that marked the dawn of the Age of Fire,\nGwyn wielded these rays of sunlight, which remains fierce even as they fade.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/tranquil-walk-of-peace",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/tranquil-walk-of-peace.png",
+    "item_name": "Tranquil Walk of Peace",
+    "item_use": "Slows all walking within effect area",
+    "item_availability": "Catacombs treasure",
+    "item_description": "Outland miracle, foreign to the Way of White\nSlows all walking within effect area.This miracle is normally used to flee,\nas it slows walking but does not affect attacks,\nbut nevertheless defines peace perfectly.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/vow-of-silence",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/vow-of-silence.png",
+    "item_name": "Vow of Silence",
+    "item_use": "Prevents casting of Magic within effect area",
+    "item_availability": "Painted World of Ariamis treasure",
+    "item_description": "Secret rite of black-haired witch Velka.\nPrevents casting of magic within effect area.Velka, the Goddess of Sin, is a rogue deity,\nbut she is versed in arts both new and old,\nand is considered to have a great range of\ninfluence even as gods are concerned.",
+    "category_type": "miracle"
+  },
+  {
+    "url": "http://darksouls.wikidot.com/wrath-of-the-gods",
+    "item_icon": "http://darksouls.wikidot.com/local--files/miracles/wrath-of-the-gods.png",
+    "item_name": "Wrath of the Gods",
+    "item_use": "Create powerful shockwave",
+    "item_availability": "Rhea of Thorolund",
+    "item_description": "Primal form of Force.\nCreate powerful shockwave.Wrath of the Gods was an epic tale that\ntattered over time and devolved into the\nmodern Force. This primal form of Force\nemits a shockwave that also inflicts damage.",
+    "category_type": "miracle"
+  }
+]

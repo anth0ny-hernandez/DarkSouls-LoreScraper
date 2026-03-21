@@ -38,14 +38,23 @@
                 <script>
                     function sortby() {
                         const selectVal = document.getElementById("sort").value;
+                        const dropdownCall = new DjangoCall();
                         switch(selectVal) {
                             case "category":
-                                const djangocall = new DjangoCall();
-                                djangocall.extractField();
+                                dropdownCall.extractField("category_type");
+                                break;
                             case "location":
-                                //
+                                dropdownCall.extractField("item_availability");
+                                break;
                             case "tags":
-                                //
+                                dropdownCall.extractField("item_tags");
+                                break;
+                            case "alpha":
+                                dropdownCall.extractField("alphabet");
+                                break;
+                            case "rev_alpha":
+                                dropdownCall.extractField("rev_alphabet");
+                                break;
                         }
                     }
                 </script>
@@ -58,7 +67,9 @@
                     idk.updatePage();
                 }
             </script>
-            <table id="lore-table">
+            <!-- insert javascript code here -->
+             
+            <table>
                 <tr>
                     <th>Icon</th>
                     <th>Name</th>
@@ -69,12 +80,14 @@
                     <th>Comments</th>
                     <th>Tags</th>
                 </tr>
+                <tbody id="lore-table">
+                    <!-- Populate here... -->
+                </tbody>
             </table>
-            <!-- insert javascript code here -->
-             <script>
+            <script>
                 function apiCall() {
                     const defaultVal = new DjangoCall();
-                    defaultVal.loadJSON("pyromancy");
+                    defaultVal.loadJSON("pyromancy", "category_type");
                 }
              </script>
         </main>

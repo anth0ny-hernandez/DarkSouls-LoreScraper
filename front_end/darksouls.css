@@ -21,8 +21,19 @@ ul li a:hover {
     background-color: gray;
 }
 table, tr, td, th {
-    /* border: 1px solid black; */
+    border: 1px solid black;
     padding: 5px;
     margin: 5px;
     white-space: pre-wrap;
+}
+textarea {
+    /* display: inline-block; */
+    /* source: https://stackoverflow.com/questions/3580063/how-to-center-a-textarea-using-css */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.something {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
 }

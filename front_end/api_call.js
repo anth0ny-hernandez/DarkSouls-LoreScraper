@@ -26,7 +26,9 @@ class DjangoCall {
         // category ****
         let incr = 1;
         for(let i = 0; i < apiArray.length; i++) {
-            const temp_type = apiArray[i]["category_type"]; // just for directory navigation
+            // important note: extracing entity id can be done by either
+            // OBJECT[index].id or OBJECT[index]["id"]
+            const temp_type = apiArray[i]["category_type"];
             const row = `
             <tr>
                 <td><img src="../Images/DS/${temp_type}/${temp_type}_${incr}.png"></td>
@@ -35,33 +37,121 @@ class DjangoCall {
                 <td>${apiArray[i]["item_availability"]}</td>
                 <td>${apiArray[i]["item_description"]}</td>
                 <td>${apiArray[i]["category_type"]}</td>
+
+
                 <td>
-                    <input type="button" formmethod="post" 
-                    type="submit" value="Comment" onclick="">
+                    <textarea id="comments" name="comments" rows="5" cols="35">Enter your theories, ideas, beliefs, etc as you see fit.</textarea>
+                    <button type="button" class="commenting" data-id="${apiArray[i].id}">Post</button>
                 </td>
                 <td>
-                    <input type="button" formmethod="post" 
-                    type="submit" value="Add" onclick="">
+                    <textarea id="tags" name="tags" rows="1" cols="32">A tagging system to sort ideas.</textarea>
+                    <button type="button" class="tagging" data-id="${apiArray[i].id}">Add</button>
                 </td>
+
             </tr>`;
-            // if(apiArray[i]["category_type"] == fieldValue) { 
-            //     loreTable.innerHTML += row;
-            //     incr++;
-            // }
-            // else { continue; }
 
             // sorts by parameter rather than specific
             // actually, why does this even work? 
             // switching the order of the conditions breaks everything
+            // ref: apiArray[i]["category_type"] == fieldValue
+
             if(fieldValue == apiArray[i][cat_type]) {
                 loreTable.innerHTML += row;
                 incr++;
             }
             else { continue; }
         }
+        this.addListeners();
     }
 
+    addListeners() {
+        document.querySelectorAll(".tagging").forEach((button) => {
+            button.addEventListener("click", () => {
+                // grabs value relative to the button that was clicked.
+                // using "tags" id would grab the first element instead
+                let tagValue = button.previousElementSibling.value;  
+                console.log(tagValue);
+                this.handleAPIForm("tags", button.dataset.id, tagValue);
+            });
+        });
+        document.querySelectorAll(".commenting").forEach((button) => {
+            button.addEventListener("click", () => {
+                let commentValue = button.previousElementSibling.value;
+                console.log(commentValue);
+                this.handleAPIForm("comments", button.dataset.id, commentValue);
+            });
+        });
+    }
     
+
+    async handleAPIForm(fieldType, entity_id, fieldValue) {
+        console.log("fieldType:", fieldType);
+        console.log("entity_id:", entity_id);
+        try {
+            let response = null;
+            
+            switch(fieldType) {
+                case "comments":
+                    response = await fetch("http://127.0.0.1:8000/soulsborne/interpretations/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            comments: fieldValue
+                        })
+                    });
+
+                    let getCommentID = await response.json();
+                    let commDerResponse = await fetch("http://127.0.0.1:8000/soulsborne/interpretationofentities/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            entity: entity_id,
+                            interpret: getCommentID.id
+                        })
+                    });
+                    break;
+
+                case "tags":
+                    response = await fetch("http://127.0.0.1:8000/soulsborne/tags/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            tag: fieldValue
+                        })
+                    });
+
+                    let tagDerResponse = await response.json();
+                    await fetch("http://127.0.0.1:8000/soulsborne/tagsofentities/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            entity: entity_id,
+                            tag: tagDerResponse.id
+                        })
+                    });
+                    break;
+            }
+            
+            if(!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+            console.log("the truth was reached!");
+        }
+        catch (error) {
+            console.error("the truth was never reached: ");
+            console.error(error.message);
+        }
+    }
+    
+
     async updatePage() {
         const sortSelect = document.getElementById("sort").value;
         const bySelect = document.getElementById("by").value;

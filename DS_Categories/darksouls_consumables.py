@@ -2,8 +2,10 @@ from darksouls_class import DarkSouls
 import requests
 import json
 
+# quick tip: remember to change "category_type" and subdirectory/filename names
+
 # ds1 = DarkSouls("http://darksouls.wikidot.com/sorceries", "class", "wiki-content-table")
-ds2 = DarkSouls("http://darksouls.wikidot.com/miracles", "class", "wiki-content-table")
+ds2 = DarkSouls("http://darksouls.wikidot.com/sorceries", "class", "wiki-content-table")
 # ds3 = DarkSouls("http://darksouls.wikidot.com/covenants", "class", "wiki-content-table")
 
 # print(ds1.url)
@@ -19,7 +21,7 @@ for item in results:
             "item_use": item[3],
             "item_availability": item[4],
             "item_description": item[5],
-            "category_type": "miracle"
+            "category_type": "sorcery"
         }
     )
 
@@ -42,6 +44,6 @@ for item in items:
     # file names are at your discretion
     img_url = requests.get(item["item_icon"]).content
     
-    with open(f'Images/DS/miracle/miracle_{i}.png', 'wb') as g:
+    with open(f'Images/DS/sorcery/sorcery_{i}.png', 'wb') as g:
         g.write(img_url)
     i+=1

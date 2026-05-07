@@ -42,10 +42,12 @@ class DjangoCall {
                 <td>
                     <textarea id="comments" name="comments" rows="5" cols="35">Enter your theories, ideas, beliefs, etc as you see fit.</textarea>
                     <button type="button" class="commenting" data-id="${apiArray[i].id}">Post</button>
+                    <div></div>
                 </td>
                 <td>
                     <textarea id="tags" name="tags" rows="1" cols="32">A tagging system to sort ideas.</textarea>
                     <button type="button" class="tagging" data-id="${apiArray[i].id}">Add</button>
+                    <div></div>
                 </td>
 
             </tr>`;
@@ -62,27 +64,133 @@ class DjangoCall {
             else { continue; }
         }
         this.addListeners();
+        // this.doesAttributeExist();
     }
 
     addListeners() {
-        document.querySelectorAll(".tagging").forEach((button) => {
-            button.addEventListener("click", () => {
-                // grabs value relative to the button that was clicked.
-                // using "tags" id would grab the first element instead
-                let tagValue = button.previousElementSibling.value;  
-                console.log(tagValue);
-                this.handleAPIForm("tags", button.dataset.id, tagValue);
+        // is called before the fact to avoid spamming API
+        let btnTaggingClass = document.querySelectorAll(".tagging");
+        let results = this.doesAttributeExist([...btnTaggingClass], "tags");
+        
+        // runs through PSQL DB to see if there are any existing tags
+        // while simultaneously attaching eventListeners to buttons
+        results.then((dict) => {
+            btnTaggingClass.forEach((button) => {
+                button.addEventListener("click", () => {
+                    // grabs value relative to the button that was clicked.
+                    // using "tags" id would grab the first element instead
+                    let tagValue = button.previousElementSibling.value;  
+                    // console.log(tagValue);
+                    this.handleAPIForm("tags", button.dataset.id, tagValue);
+                });
+              
+                // console.log(dict[button.dataset.id]);
+                let div = document.querySelector(`.tagging[data-id="${button.dataset.id}"]`);
+                
+                // evaluates if an entity has any tags or not before populating associated div element
+                if(dict[button.dataset.id].length > 0) {
+                    // for(let i = 0; i < dict[button.dataset.id].length; i++) {
+                        div.nextElementSibling.innerHTML = "Tags: " + dict[button.dataset.id].join(", ");
+                    // }
+                } 
+                else { div.nextElementSibling.innerHTML = "No tags"; }
             });
-        });
-        document.querySelectorAll(".commenting").forEach((button) => {
-            button.addEventListener("click", () => {
-                let commentValue = button.previousElementSibling.value;
-                console.log(commentValue);
-                this.handleAPIForm("comments", button.dataset.id, commentValue);
+        });        
+
+        let btnCommentingClass = document.querySelectorAll(".commenting");
+        results = this.doesAttributeExist([...btnCommentingClass], "comments");
+        results.then((dict) => {
+            btnCommentingClass.forEach((button) => {
+                button.addEventListener("click", () => {
+                    let commentValue = button.previousElementSibling.value;
+                    // console.log(commentValue);
+                    this.handleAPIForm("comments", button.dataset.id, commentValue);
+                });
+                //
+                let div = document.querySelector(`.commenting[data-id="${button.dataset.id}"]`);
+                    
+                // evaluates if an entity has any comments or not before populating associated div element
+                if(dict[button.dataset.id].length > 0) {
+                    // for(let i = 0; i < dict[button.dataset.id].length; i++) {
+                        div.nextElementSibling.innerHTML = "Comments: " + dict[button.dataset.id].join(", ");
+                    // }
+                } 
+                else { div.nextElementSibling.innerHTML = "No comments"; }
             });
         });
     }
     
+
+    async doesAttributeExist(btnClassArray, btnType) {
+        try {
+            let results = {};
+            switch(btnType) {
+                case "tags":
+                    // iterates & retrieves tags associated with entity id
+                    let response = await fetch(
+                        `http://127.0.0.1:8000/soulsborne/tagsofentities`
+                    );
+                    let entityTagArray = await response.json();
+        
+                    // let results = {};
+                    
+                    for(let outer = 0; outer < btnClassArray.length; outer++) {
+                        let tags = [];
+                        for(let inner = 0; inner < entityTagArray.length; inner++) {
+                            if(btnClassArray[outer].dataset.id == entityTagArray[inner]["entity"]) {
+                                if(entityTagArray[inner]["tag"] != null){
+                                    let response2 = await fetch(
+                                        `http://127.0.0.1:8000/soulsborne/tags/?id=${entityTagArray[inner]["tag"]}`
+                                    );
+                                    let tagArray = await response2.json();
+        
+                                    for(let index = 0; index < tagArray.length; index++) {
+                                        tags.push(tagArray[index]["tag"]);
+                                    }
+                                } // add else continue?
+                            }
+                        }
+                        // console.log(`${btnClassArray[outer].dataset.id} has ${counter} matches in the database!`);
+                        results[btnClassArray[outer].dataset.id] = tags;
+                    }
+                    break;
+                case "comments":
+                    let commentResponse = await fetch(
+                        `http://127.0.0.1:8000/soulsborne/interpretationofentities`
+                    );
+                    let entityCommentArray = await commentResponse.json();
+        
+                    // let results = {};
+                    for(let outer = 0; outer < btnClassArray.length; outer++) {
+                        let comments = [];
+                        for(let inner = 0; inner < entityCommentArray.length; inner++) {
+                            if(btnClassArray[outer].dataset.id == entityCommentArray[inner]["entity"]) {
+                                if(entityCommentArray[inner]["interpret"] != null){
+                                    let response2 = await fetch(
+                                        `http://127.0.0.1:8000/soulsborne/interpretations/?id=${entityCommentArray[inner]["interpret"]}`
+                                    );
+                                    let commentArray = await response2.json();
+        
+                                    for(let index = 0; index < commentArray.length; index++) {
+                                        comments.push(commentArray[index]["comments"]);
+                                    }
+                                } // add else continue?
+                            }
+                        }
+                        // console.log(`${btnClassArray[outer].dataset.id} has ${counter} matches in the database!`);
+                        results[btnClassArray[outer].dataset.id] = comments;
+                    }
+                    break;
+            }
+            console.log(results);
+            return results;
+        }
+        catch(error) {
+            console.error("Error has been caught: ");
+            console.error(error.message);
+        }
+    }
+
 
     async handleAPIForm(fieldType, entity_id, fieldValue) {
         console.log("fieldType:", fieldType);

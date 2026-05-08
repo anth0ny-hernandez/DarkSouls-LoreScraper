@@ -1,5 +1,7 @@
 # DarkSouls-LoreScraper
-A small passion project regarding the lore of the Dark Souls world. Due to much of the series' story being told through item descriptions, I thought it easier to be able to gather and consolidate much of said descriptions into one easily manageable place for lore enthusiasts to interpret at their own discretion. Work in progress.
+A small passion project regarding the lore of the Dark Souls world. Due to much of the series' story being told through item descriptions, I thought it easier to be able to gather and consolidate much of said descriptions into one easily manageable place for lore enthusiasts to interpret at their own discretion.  
+5/7/2026 -- All essential features are complete. Any further edits are either fine-tuning the code, trimming the amount of lines, or adding additional feautures.  
+And remember, be safe, friends. Don't you dare go Hollow. 🔥
 
 To run the Django REST Framework API, note the following packages:  
 ```pip install psycopg2-binary``` for connecting to PostgreSQL Databases, or your choice of database  
@@ -8,7 +10,7 @@ To run the Django REST Framework API, note the following packages:
 ```pip install django-filter``` so that it is easier to query the API by specific fields/values
  
  ... and just a few more for all other necessary libraries:  
- ```pip install bs4``` aka Beautiful Soul 4, a Python library to permit web scraping navigation, such as extracting text, links, images, etc  
+ ```pip install bs4``` aka Beautiful Soup 4, a Python library to permit web scraping navigation, such as extracting text, links, images, etc  
  ```pip install aiohttp``` is an asynchronous HTTP framework, mainly used to handle multiple web requests simultaneously for this project  
  ```pip install requests``` should be self-explanatory, in which it was used to utilize the HTTP POST method in regards to the API
  

@@ -2,6 +2,7 @@
 A small passion project regarding the lore of the Dark Souls world. Due to much of the series' story being told through item descriptions, I thought it easier to be able to gather and consolidate much of said descriptions into one easily manageable place for lore enthusiasts to interpret at their own discretion. Work in progress.
 
 To run the Django REST Framework API, note the following packages:
+
 'psycopg2-binary' for connecting to PostgreSQL Databases, or your choice of database
 'django-cors-headers' to resolve and securely allow the web browser to accept resources served from a different domain
 'djangorestframework' which installs the entire foundation for this project
@@ -15,5 +16,6 @@ To run the Django REST Framework API, note the following packages:
 
  Optionally, but preferrably, XAMPP/Apache may be downloaded to host and give the project a more professional feel and experience.
  It should be noted that doing so -- or not doing so -- would entail modifying the CORS settings in Django's settings.py file.
+ 
     With XAMPP, add CORS_ALLOWED_HEADERS = ['http://localhost', 'http://127.0.0.1'].
     Otherwise, set the field equal to True.

@@ -7,9 +7,6 @@
         </title>
         <meta charset="utf-8">
     </head>
-    <!-- Important: Will need to install django-cors-headers package to solve
-     the issue of Cross-Origin Request Block ===>
-     "https://pypi.org/project/django-cors-headers/" -->
     <body onload="apiCall()">
         <script src="api_call.js"></script>
         <header>
@@ -66,9 +63,7 @@
                     const idk = new DjangoCall();
                     idk.updatePage();
                 }
-            </script>
-            <!-- insert javascript code here -->
-             
+            </script>             
             <table>
                 <tr>
                     <th>Icon</th>

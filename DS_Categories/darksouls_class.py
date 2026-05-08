@@ -28,8 +28,8 @@ class DarkSouls:
             soup = BeautifulSoup(page, "html.parser")
             h2_results = soup.find(id="page-content").find("h2")
             # due to varying degrees of information, the only constant
-            # is that it all lies between two <h2> elements. ergo, we 
-            # extract whatever is in between those two
+            # is that it all lies between two <h2> elements. 
+            # ergo, we extract whatever is in between those two.
             p_tags = ""
             for sibling in h2_results.find_next_siblings():
                 if sibling.name == "h2":

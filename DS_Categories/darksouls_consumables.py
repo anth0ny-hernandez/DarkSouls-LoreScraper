@@ -8,8 +8,6 @@ import json
 ds2 = DarkSouls("http://darksouls.wikidot.com/sorceries", "class", "wiki-content-table")
 # ds3 = DarkSouls("http://darksouls.wikidot.com/covenants", "class", "wiki-content-table")
 
-# print(ds1.url)
-# ds1.get_all_urls("class", "wiki-content-table")
 results = ds2.run()
 formatted = []
 for item in results:
@@ -25,7 +23,6 @@ for item in results:
         }
     )
 
-# self-note: 'with' automatically closes open files (and more...)
 with open('./scraped_data.json', 'w') as f:
     json.dump(formatted, f, indent=2)
 

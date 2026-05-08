@@ -1,7 +1,5 @@
 class DjangoCall {
-    // constructor(cat_type) {
-        // this.cat_type = cat_type;
-    // }
+
     async api_request() {
         try {
             const response = await fetch("http://127.0.0.1:8000/soulsborne/");
@@ -9,8 +7,6 @@ class DjangoCall {
                 throw new Error(`Response status: ${response.status}`);
             }
             const result = await response.json();
-            // console.log(result);
-            // populate(result);
             return result;
         }
         catch (error) {
@@ -38,7 +34,6 @@ class DjangoCall {
                 <td>${apiArray[i]["item_description"]}</td>
                 <td>${apiArray[i]["category_type"]}</td>
 
-
                 <td>
                     <textarea id="comments" name="comments" rows="5" cols="35">Enter your theories, ideas, beliefs, etc as you see fit.</textarea>
                     <button type="button" class="commenting" data-id="${apiArray[i].id}">Post</button>
@@ -64,7 +59,6 @@ class DjangoCall {
             else { continue; }
         }
         this.addListeners();
-        // this.doesAttributeExist();
     }
 
     addListeners() {
@@ -80,18 +74,14 @@ class DjangoCall {
                     // grabs value relative to the button that was clicked.
                     // using "tags" id would grab the first element instead
                     let tagValue = button.previousElementSibling.value;  
-                    // console.log(tagValue);
                     this.handleAPIForm("tags", button.dataset.id, tagValue);
                 });
               
-                // console.log(dict[button.dataset.id]);
                 let div = document.querySelector(`.tagging[data-id="${button.dataset.id}"]`);
                 
                 // evaluates if an entity has any tags or not before populating associated div element
                 if(dict[button.dataset.id].length > 0) {
-                    // for(let i = 0; i < dict[button.dataset.id].length; i++) {
-                        div.nextElementSibling.innerHTML = "Tags: " + dict[button.dataset.id].join(", ");
-                    // }
+                    div.nextElementSibling.innerHTML = "Tags: " + dict[button.dataset.id].join(", ");
                 } 
                 else { div.nextElementSibling.innerHTML = "No tags"; }
             });
@@ -103,17 +93,13 @@ class DjangoCall {
             btnCommentingClass.forEach((button) => {
                 button.addEventListener("click", () => {
                     let commentValue = button.previousElementSibling.value;
-                    // console.log(commentValue);
                     this.handleAPIForm("comments", button.dataset.id, commentValue);
                 });
-                //
                 let div = document.querySelector(`.commenting[data-id="${button.dataset.id}"]`);
                     
                 // evaluates if an entity has any comments or not before populating associated div element
                 if(dict[button.dataset.id].length > 0) {
-                    // for(let i = 0; i < dict[button.dataset.id].length; i++) {
-                        div.nextElementSibling.innerHTML = "Comments: " + dict[button.dataset.id].join(", ");
-                    // }
+                    div.nextElementSibling.innerHTML = "Comments: " + dict[button.dataset.id].join(", ");
                 } 
                 else { div.nextElementSibling.innerHTML = "No comments"; }
             });
@@ -150,7 +136,6 @@ class DjangoCall {
                                 } // add else continue?
                             }
                         }
-                        // console.log(`${btnClassArray[outer].dataset.id} has ${counter} matches in the database!`);
                         results[btnClassArray[outer].dataset.id] = tags;
                     }
                     break;
@@ -177,7 +162,6 @@ class DjangoCall {
                                 } // add else continue?
                             }
                         }
-                        // console.log(`${btnClassArray[outer].dataset.id} has ${counter} matches in the database!`);
                         results[btnClassArray[outer].dataset.id] = comments;
                     }
                     break;

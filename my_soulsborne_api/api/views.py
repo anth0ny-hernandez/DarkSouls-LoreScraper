@@ -5,11 +5,7 @@ from .models import Entities, Tags, TagsOfEntities, Interpretations, Interpretat
 from .serializers import EntitiesSerializer, TaggingSerializer, TaggingEntitiesSerializer, InterpretSerializer, InterpretEntitiesSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 
-# from rest_framework.decorators import api_view
-# from rest_framework.response import Response
 
-
-# Create your views here.
 class SoulsEntityList(generics.ListCreateAPIView):
     queryset = Entities.objects.all()
     serializer_class = EntitiesSerializer
@@ -39,31 +35,3 @@ class InterpretEntsList(generics.ListCreateAPIView):
     serializer_class = InterpretEntitiesSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['entity']
-
-
-#     @api_view(['POST'])
-#     def postTag(request):
-#         entity_id = request.data.get('entity_id')
-#         tag_name = request.data.get('tag_name').lower()
-        
-#         tag, created = Tags.objects.get_or_create(name=tag_name)
-#         entity = Entities.objects.get(id="entity_id")
-#         EntityTags.objects.create(entity=entity, tag=tag)
-        
-#         return Response({"message": "ENTITY TAGGED"}, status=201)
-    
-
-#     @api_view(['POST'])
-#     def postInterpretation(request):
-#         entity_id = request.data.get('entity_id')
-#         body = request.data.get('body')
-        
-#         interpretation = Interpretations.objects.create(body=body)
-#         entity = Entities.objects.get(id=entity_id)
-        
-#         InterpretationEntities.objects.create(
-#             interpretation=interpretation,
-#             entity=entity
-#         )
-        
-#         return Response({"message": "THEORY CRAFTED"}, status=201)
